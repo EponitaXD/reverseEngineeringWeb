@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid d-flex">
+                <div class="p-2 flex-grow-1">
+                    <span class="navbar-brand mb-0 h1">Navbar</span>
+                </div>
+                <div class="p-2 dropstart">
+                    <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Menu
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Home</a></li>
+                        <li><a class="dropdown-item" href="#">About us</a></li>
+                        <li><a class="dropdown-item" href="#">Reverse Engineering</a></li>
+                        <li><a class="dropdown-item" href="#">Amazon Echo</a></li>
+                        <li><a class="dropdown-item" href="#">FAQ</a></li>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container mt-5 px-5">
+            <h2 class="text-center">What is Reverse Engineering?</h2>
+
+            <div class="d-flex" style="height: 5vh;">
+                <div class="vr opacity-0"></div>
+            </div>
+
+            <img src="images/reverse_process.png" class="w-50 rounded float-end" alt="A white Amazon Echo">
+
+            <p>
+                Reverse engineering is the systematic process of analyzing 
+                an existing product, system, or piece of software to understand 
+                how it works, how it was designed, and how its components interact. 
+                Rather than starting from requirements and building forward, 
+                reverse engineering works backward from the finished artifact to 
+                uncover its structure, functionality, and underlying principles. 
+                This process is commonly used in engineering, computer science, 
+                and cybersecurity to study legacy systems, improve or redesign products, 
+                ensure interoperability, or identify vulnerabilities. By deconstructing 
+                a system into its individual parts—whether hardware components, software 
+                modules, or data flows—engineers can gain insight into design decisions 
+                that may not be documented or easily observable.
+            </p>
+            <p>
+                The reverse engineering process typically involves several stages: 
+                observation, decomposition, analysis, and reconstruction. First, the 
+                system is observed in operation to understand its behavior and outputs. 
+                Next, it is broken down into smaller components that can be individually 
+                examined. During analysis, engineers determine how each component functions 
+                and how they communicate with one another, often creating diagrams, models, 
+                or specifications to capture this understanding. Finally, the knowledge 
+                gained is used to reconstruct the system conceptually or to develop an 
+                improved or alternative design. Overall, reverse engineering is a powerful 
+                tool for learning from existing solutions, maintaining and upgrading complex 
+                systems, and fostering innovation by building upon what already exists.
+            </p>
+        </div>
+
+        <div class="d-flex" style="height: 25vh;">
+            <div class="vr opacity-0"></div>
+        </div>
+
+        <div class="container-fluid text-bg-secondary mt-5 pt-5">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col">
+                        <h3>CUA's Reverse Engineering Team!</h2>
+                        <p>Learning how things work to stay safe.</p>
+                        <p>Licence: MIT</p>
+                    </div>
+
+                    <div class="col">
+                        <h2>Links</h2>
+                        <p><a class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="#">Home</a></p>
+                        <p><a class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="#">About us</a></p>
+                        <p><a class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="#">Reverse Engineering</a></p>
+                        <p><a class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="#">Amazon Echo</a></p>
+                        <p><a class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="#">FAQ</a></p>
+                    </div>
+                    <div class="col-6"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
