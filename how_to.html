@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid d-flex">
+                <div class="p-2 flex-grow-1">
+                    <span class="navbar-brand mb-0 h1">Navbar</span>
+                </div>
+                <div class="p-2 dropstart">
+                    <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Menu
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="index.html">Home</a></li>
+                        <li><a class="dropdown-item" href="about_us.html">About us</a></li>
+                        <li><a class="dropdown-item" href="reverse_engineering.html">Reverse Engineering</a></li>
+                        <li><a class="dropdown-item" href="how_to.html">Amazon Echo</a></li>
+                        <li><a class="dropdown-item" href="faq.html">FAQ</a></li>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container mt-5 px-5">
+            <h2 class="text-center">How to Reverse Engineer an Amazon Echo!</h2>
+
+            <div class="d-flex" style="height: 5vh;">
+                <div class="vr opacity-0"></div>
+            </div>
+            <p>
+                If you are here, that means you’re curious about reverse engineering 
+                and want an executable example! For our Senior Design project, our 
+                team documented the reverse engineering of a second generation Amazon 
+                Echo. Our team hopes this step by step guide will help you deep your 
+                hands into reverse engineering:
+            </p>
+
+            <video class="float-end w-50 float-end" controls>
+                <source src="images/example_video.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+            </video>
+            <h3>Step 1: Define your goal</h3>
+            <p>
+                Before touching the device, decide why you’re reverse engineering it. 
+                Are you interested in its hardware architecture, how voice input flows 
+                through the system, power management, or privacy-related design choices? 
+                Having a clear objective keeps the process focused and helps you decide 
+                which parts of the Echo deserve the most attention.
+            </p>
+
+            <video width="50vw float-end" controls>
+                <source src="" type="video/mp4">
+                <source src="" type="video/ogg">
+                Your browser does not support HTML video.
+            </video>
+            <h3>Step 2: Research and observe from the outside</h3>
+            <p>
+                Start with non-invasive research. Look up publicly available information 
+                such as FCC filings, teardown photos, patents, and user manuals. These sources 
+                often reveal internal components, antenna layouts, and system architecture 
+                without opening the device. At the same time, observe how the Echo behaves 
+                during normal use—boot time, LED patterns, button responses, and network 
+                activity—to build a mental model of how the system operates.
+            </p>
+
+            <video width="50vw float-end" controls>
+                <source src="" type="video/mp4">
+                <source src="" type="video/ogg">
+                Your browser does not support HTML video.
+            </video>
+            <h3>Step 3: Perform a careful physical teardown</h3>
+            <p>
+                If your goal includes hardware understanding, carefully disassemble the Echo 
+                using proper tools and safety precautions. Document each step with photos or 
+                notes. As you expose internal components, identify major subsystems such as 
+                the microphone array, speaker, power supply, main board, and wireless modules. 
+                Look for part numbers and manufacturer markings; these often reveal the role 
+                and capabilities of each component.
+            </p>
+
+            <video width="50vw float-end" controls>
+                <source src="" type="video/mp4">
+                <source src="" type="video/ogg">
+                Your browser does not support HTML video.
+            </video>
+            <h3>Step 4: Identify and map the hardware components</h3>
+            <p>
+                Once the device is open, map out how components are connected. This includes 
+                processors, memory chips, microphones, sensors, and radios. Creating a block 
+                diagram is very helpful here. The aim is not to clone the device, but to understand 
+                how responsibilities are divided across the hardware and how data and power 
+                flow through the system.
+            </p>
+
+            <video width="50vw float-end" controls>
+                <source src="" type="video/mp4">
+                <source src="" type="video/ogg">
+                Your browser does not support HTML video.
+            </video>
+            <h3>Step 5: Analyze system behavior (without breaking protections)</h3>
+            <p>
+                At a high level, analyze how the Echo operates as a system. For example: 
+                how user input (voice or button press) leads to visible or audible output, 
+                how the device communicates over the network, and how it manages updates 
+                and errors. This can be done through observation, logging network traffic at 
+                a conceptual level, or studying documented system behavior—without attempting 
+                to bypass encryption, authentication, or DRM.
+            </p>
+
+            <video width="50vw float-end" controls>
+                <source src="" type="video/mp4">
+                <source src="" type="video/ogg">
+                Your browser does not support HTML video.
+            </video>
+            <h3>Step 6: Document your findings clearly</h3>
+            <p>
+                Reverse engineering is as much about documentation as discovery. Write clear 
+                notes, diagrams, and explanations of what each component does and how the 
+                system fits together. Try explaining the Echo’s operation as if you were 
+                teaching someone else—this often reveals gaps in understanding and strengthens 
+                your analysis.
+            </p>
+
+            <video width="50vw float-end" controls>
+                <source src="" type="video/mp4">
+                <source src="" type="video/ogg">
+                Your browser does not support HTML video.
+            </video>
+            <h3>Step 7: Reflect and redesign</h3>
+            <p>
+                Finally, use what you’ve learned to think critically. What design choices stand 
+                out? What trade-offs were made between cost, performance, privacy, and usability? 
+                How might you redesign a similar smart speaker differently? This reflection step 
+                is where reverse engineering truly becomes a learning and innovation tool.
+            </p>
+        </div>
+
+        <div class="d-flex" style="height: 25vh;">
+            <div class="vr opacity-0"></div>
+        </div>
+
+        <div class="container-fluid text-bg-secondary mt-5 pt-5">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col">
+                        <h3>CUA's Reverse Engineering Team!</h2>
+                        <p>Learning how things work to stay safe.</p>
+                        <p>Licence: MIT</p>
+                    </div>
+
+                    <div class="col">
+                        <h2>Links</h2>
+                        <p><a class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="index.html">Home</a></p>
+                        <p><a class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="about_us.html">About us</a></p>
+                        <p><a class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="reverse_engineering.html">Reverse Engineering</a></p>
+                        <p><a class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="how_to.html">Amazon Echo</a></p>
+                        <p><a class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="faq.html">FAQ</a></p>
+                    </div>
+                    <div class="col-6"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
