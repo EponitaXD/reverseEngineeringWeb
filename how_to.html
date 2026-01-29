@@ -32,97 +32,115 @@
             </div>
         </nav>
 
-        <div class="container mt-5 px-5">
-            <h2 class="text-center">How to Reverse Engineer an Amazon Echo!</h2>
+        <div class="d-flex" style="height: 5vh;">
+            <div class="vr opacity-0"></div>
+        </div>
 
-            <p>
-                If you are here, that means you’re curious about reverse engineering 
-                and want an executable example! For our Senior Design project, our 
-                team documented the reverse engineering of a second generation Amazon 
-                Echo. Our team hopes this step by step guide will help you deep your 
-                hands into reverse engineering:
-            </p>
-
-            <div class="d-flex" style="height: 5vh;">
-                <div class="vr opacity-0"></div>
+        <div class="container-fluid px-5">
+        <div class="row">
+            <div class="col-3">
+                <div class="sticky-top" style="top: 20px;">
+                    <nav class="nav flex-column">
+                        <a class="nav-link active" href="#materials">Materials</a>
+                        <a class="nav-link" href="#disassembling">Step 1: Disassembling the Amazon Echo</a>
+                        <a class="nav-link" href="#reference">Reference Materials</a>
+                    </nav>
+                </div>
             </div>
+            <div class="col-9">
+                <h2 class="text-center">How to Reverse Engineer an Amazon Echo!</h2>
 
-            <h3>Materials:</h3>
-            <ul>
-                <li>2nd Gen Amazon Echo Dot</li>
-                <li><a href="https://www.amazon.com/HiLetgo-Analyzer-Ferrite-Channel-Arduino/dp/B077LSG5P2?crid=1QBAJ6KU2N403&dib=eyJ2IjoiMSJ9.dlhze1_6QV8KrkIYmy_VnRbsk9Vr2ens2WQH6mnBtihNE1eYlUt8IV15_vvirpbV7Lvs3hcF76F80aX9xBZTaikZHKRXPh8YVWjXUkw7HmdHYU-5nQUXtEjgpB7PjMDGj9UOXBLMrZPFIPzINLyGVLemJfTgVe6GAS2_aX520GxFMHNORHITJ4CEicfH-knKfQWt8pUmVZv1ETQiAEWZC2v3QQsCzQf2AkMN5ufwlvc.SaKneOKd5bSrysHkXPoZJuzUljVQEjza_HQw4laRvZw&dib_tag=se&keywords=logic%2Banalyzer&qid=1715099833&sprefix=logic%2Bana%2Caps%2C126&sr=8-3&linkCode=sl1&tag=mattbrwn-20&linkId=50491a0df9c1c27f6c5717756a5a8af7&language=en_US&ref_=as_li_ss_tl&th=1">
-                    Logic Analyzer
-                </a></li>
-                <li><a href="https://www.amazon.com/iFixit-Pro-Tech-Toolkit-Electronics/dp/B01GF0KV6G?crid=11HV62BGEGMP4&dib=eyJ2IjoiMSJ9.5viILwBYWGy40kf4-OSIg20zR9hP13zKRKQkbwCVdN-iPfAewC0hbzI_LIxaXOUOaVEKRtQ16exhoBDr0mlverkNn-zh6KWXNjzM47M9ksfMxjFYhTv5OFLtKRQT3YU55B-gU6yGRvVzx7kP0KVMT3M6QjZMgwfqyxuT302vBuESYrQFLYUTHO7SKFXJnIEMrcV2WudT0JCMmC3wQYKqwYgSzad-JOkcBYepCvqYyZLaWwBiZ_ZoQLengDjyT1xRomvdpMeeZBbDkjgt17U-r3YV4v_eHU1N0qvSRnfLNLY.VGFdXIzQEg8L2Y7YUNhkOO0LLhUrCXi3vP9a5FCX2w8&dib_tag=se&keywords=ifixit&qid=1715100264&sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&sprefix=ifixit%2Caps%2C122&sr=8-5&linkCode=sl1&tag=mattbrwn-20&linkId=c53a3d48ce51167df8b8a1e79927bace&language=en_US&ref_=as_li_ss_tl&th=1">
-                    iFixit Pro Tech Toolkit
-                </a></li>
-                <li>Microscope</li>
-                <li>Soldering/Desoldering supplies</li>
-                <li><a href="https://www.ebay.com/itm/334442938179">
-                    Progarmm Adapter socket 3in1 EMMC BGA153/BGA169 BGA162/BGA186/BGA221 series
-                </a></li>
-            </ul>
+                <p>
+                    If you are here, that means you’re curious about reverse engineering 
+                    and want an executable example! For our Senior Design project, our 
+                    team documented the reverse engineering of a second generation Amazon 
+                    Echo. Our team hopes this step by step guide will help you deep your 
+                    hands into reverse engineering:
+                </p>
 
-            <p>For reference, the following tools will be numbered as we go through the process.</p>
+                <div class="d-flex" style="height: 5vh;">
+                    <div class="vr opacity-0"></div>
+                </div>
 
-            <div class="d-flex justify-content-center">
-                <img src="images/how_to/materials/tools.png" alt="tool kit with enumerated parts" class="w-75 mb-5">
-            </div>
+                <h3 id="materials">Materials:</h3>
+                <ul>
+                    <li>2nd Gen Amazon Echo Dot</li>
+                    <li><a href="https://www.amazon.com/HiLetgo-Analyzer-Ferrite-Channel-Arduino/dp/B077LSG5P2?crid=1QBAJ6KU2N403&dib=eyJ2IjoiMSJ9.dlhze1_6QV8KrkIYmy_VnRbsk9Vr2ens2WQH6mnBtihNE1eYlUt8IV15_vvirpbV7Lvs3hcF76F80aX9xBZTaikZHKRXPh8YVWjXUkw7HmdHYU-5nQUXtEjgpB7PjMDGj9UOXBLMrZPFIPzINLyGVLemJfTgVe6GAS2_aX520GxFMHNORHITJ4CEicfH-knKfQWt8pUmVZv1ETQiAEWZC2v3QQsCzQf2AkMN5ufwlvc.SaKneOKd5bSrysHkXPoZJuzUljVQEjza_HQw4laRvZw&dib_tag=se&keywords=logic%2Banalyzer&qid=1715099833&sprefix=logic%2Bana%2Caps%2C126&sr=8-3&linkCode=sl1&tag=mattbrwn-20&linkId=50491a0df9c1c27f6c5717756a5a8af7&language=en_US&ref_=as_li_ss_tl&th=1">
+                        Logic Analyzer
+                    </a></li>
+                    <li><a href="https://www.amazon.com/iFixit-Pro-Tech-Toolkit-Electronics/dp/B01GF0KV6G?crid=11HV62BGEGMP4&dib=eyJ2IjoiMSJ9.5viILwBYWGy40kf4-OSIg20zR9hP13zKRKQkbwCVdN-iPfAewC0hbzI_LIxaXOUOaVEKRtQ16exhoBDr0mlverkNn-zh6KWXNjzM47M9ksfMxjFYhTv5OFLtKRQT3YU55B-gU6yGRvVzx7kP0KVMT3M6QjZMgwfqyxuT302vBuESYrQFLYUTHO7SKFXJnIEMrcV2WudT0JCMmC3wQYKqwYgSzad-JOkcBYepCvqYyZLaWwBiZ_ZoQLengDjyT1xRomvdpMeeZBbDkjgt17U-r3YV4v_eHU1N0qvSRnfLNLY.VGFdXIzQEg8L2Y7YUNhkOO0LLhUrCXi3vP9a5FCX2w8&dib_tag=se&keywords=ifixit&qid=1715100264&sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&sprefix=ifixit%2Caps%2C122&sr=8-5&linkCode=sl1&tag=mattbrwn-20&linkId=c53a3d48ce51167df8b8a1e79927bace&language=en_US&ref_=as_li_ss_tl&th=1">
+                        iFixit Pro Tech Toolkit
+                    </a></li>
+                    <li>Microscope</li>
+                    <li>Soldering/Desoldering supplies</li>
+                    <li><a href="https://www.ebay.com/itm/334442938179">
+                        Progarmm Adapter socket 3in1 EMMC BGA153/BGA169 BGA162/BGA186/BGA221 series
+                    </a></li>
+                </ul>
 
-            <div class="d-flex" style="height: 5vh;">
-                <div class="vr opacity-0"></div>
-            </div>
+                <p>For reference, the following tools will be numbered as we go through the process.</p>
 
-            <h3>Step 1: Disassembling the Amazon Echo</h3>
-            <p>Use the jimmy (11) and metal spudger (10) to take off the rubber and plastic from the echo.</p>
+                <div class="d-flex justify-content-center">
+                    <img src="images/how_to/materials/tools.png" alt="tool kit with enumerated parts" class="w-75 mb-5">
+                </div>
 
-            <div class="d-flex justify-content-center">
-                <img src="images/how_to/step1/take_off_the_rubber_and_plastic.jpg" alt="echo wihtout plastic cap" class="w-50 mb-5">
-            </div>
+                <div class="d-flex" style="height: 5vh;">
+                    <div class="vr opacity-0"></div>
+                </div>
 
-            <p>Remove the four screws using the magnetic driver (14).</p>
+                <h3 id="disassembling">Step 1: Disassembling the Amazon Echo</h3>
+                <p>Use the jimmy (11) and metal spudger (10) to take off the rubber and plastic from the echo.</p>
 
-            <div class="d-flex justify-content-center">
-                <img src="images/how_to/step1/remove_the_four_screws.jpg" alt="echo next fours screws" class="w-25 mx-3 mb-5">
-                <img src="images/how_to/step1/remove_the_four_screws0.jpg" alt="a set of screw heads" class="w-25 mx-3 mb-5">
-            </div>
+                <div class="d-flex justify-content-center">
+                    <img src="images/how_to/step1/take_off_the_rubber_and_plastic.jpg" alt="echo wihtout plastic cap" class="w-50 mb-5">
+                </div>
 
-            <p>Take back cap off of the device.</p>
+                <p>Remove the four screws using the magnetic driver (14).</p>
 
-            <div class="d-flex justify-content-center">
-                <video class="w-25 mb-5" controls>
-                    <source src="images/how_to/step1/take_back_cap_off.mp4" type="video/mp4">
-                    Your browser does not support HTML video.
-                </video>
-            </div>
-            
-            <p>Remove the orange ribbon cable from PCB using the jimmy (11).</p>
+                <div class="d-flex justify-content-center">
+                    <img src="images/how_to/step1/remove_the_four_screws.jpg" alt="echo next fours screws" class="w-25 mx-3 mb-5">
+                    <img src="images/how_to/step1/remove_the_four_screws0.jpg" alt="a set of screw heads" class="w-25 mx-3 mb-5">
+                </div>
 
-            <div class="d-flex justify-content-center">
-                <img src="images/how_to/step1/remove_the_orange_ribbon_cable.jpg" alt="echo with an orange cable" class="w-25 mx-3 mb-5">
-                <img src="images/how_to/step1/remove_the_orange_ribbon_cable0.jpg" alt="back of the echo" class="w-25 mx-3 mb-5">
-            </div>
-            
-            <p>
-                Now that the main PCB is detached, find the side with the metal cap and pry off using the metal 
-                spudger (10). Identify the chips using previous RE work. Use heat gun at 410 °C. Heat up the 
-                back of the main PCB and front. Add flux to the firmware chip. Heat up flux and chip. Use 
-                angled tweezers (6) to pull the chip up and off the PCB. Clean chip using alcohol and q-tips 
-                taking care not to leave cotton treads in the connectors.  
-            </p>
+                <p>Take back cap off of the device.</p>
 
-            <div class="d-flex" style="height: 10vh;">
-                <div class="vr opacity-0"></div>
-            </div>
+                <div class="d-flex justify-content-center">
+                    <video class="w-25 mb-5" controls>
+                        <source src="images/how_to/step1/take_back_cap_off.mp4" type="video/mp4">
+                        Your browser does not support HTML video.
+                    </video>
+                </div>
+                
+                <p>Remove the orange ribbon cable from PCB using the jimmy (11).</p>
 
-            <h3>Reference Materials:</h3>
-            <div class="d-flex justify-content-center">
-                <iframe src="https://www.youtube.com/embed/H0IEMVDebzE?si=5nGpVjoudggG0WxS" 
-                title="YouTube video player" frameborder="0" class="w-50"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <div class="d-flex justify-content-center">
+                    <img src="images/how_to/step1/remove_the_orange_ribbon_cable.jpg" alt="echo with an orange cable" class="w-25 mx-3 mb-5">
+                    <img src="images/how_to/step1/remove_the_orange_ribbon_cable0.jpg" alt="back of the echo" class="w-25 mx-3 mb-5">
+                </div>
+                
+                <p>
+                    Now that the main PCB is detached, find the side with the metal cap and pry off using the metal 
+                    spudger (10). Identify the chips using previous RE work. Use heat gun at 410 °C. Heat up the 
+                    back of the main PCB and front. Add flux to the firmware chip. Heat up flux and chip. Use 
+                    angled tweezers (6) to pull the chip up and off the PCB. Clean chip using alcohol and q-tips 
+                    taking care not to leave cotton treads in the connectors.  
+                </p>
+
+                <div class="d-flex" style="height: 10vh;">
+                    <div class="vr opacity-0"></div>
+                </div>
+
+                <h3 id="reference">Reference Materials:</h3>
+                <div class="d-flex justify-content-center">
+                    <iframe src="https://www.youtube.com/embed/H0IEMVDebzE?si=5nGpVjoudggG0WxS" 
+                    title="YouTube video player" frameborder="0" class="w-50 h-100"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
             </div>
         </div>
+        </div>
+
 
         <div class="d-flex" style="height: 25vh;">
             <div class="vr opacity-0"></div>
