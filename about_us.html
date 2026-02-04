@@ -8,26 +8,35 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <nav class="navbar bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid d-flex justify-content-between">
-                <div class="p-2 flex-grow-1">
-                        <a class="navbar-brand" href="#">
-                            <img src="images/logo.png" alt="logo" width="70" height="70">
-                        </a>
-                    <span class="navbar-brand mb-0 h1">CUA's Reverse Engineering Team</span>
-                </div>
-                <div class="p-2 dropdown">
-                <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Menu
+            <!-- Brand/Logo -->
+            <div >
+                <a class="navbar-brand" href="#">
+                    <img src="images/logo.png" alt="logo" width="70" height="70">
+                </a>
+                <span class="navbar-brand mb-0 h5">Reverse Engineering</span>
+            </div>
+
+            <!-- Toggler Button for Small Screens -->
+            <div class="d-flex justify-content-end">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="index.html">Home</a></li>
-                    <li><a class="dropdown-item" href="about_us.html">About us</a></li>
-                    <li><a class="dropdown-item" href="reverse_engineering.html">Reverse Engineering</a></li>
-                    <li><a class="dropdown-item" href="how_to.html">Amazon Echo</a></li>
-                    <li><a class="dropdown-item" href="faq.html">FAQ</a></li>
+            </div>
+
+            <!-- Navbar Links (Collapsible) -->
+            <div class="d-flex justify-content-end">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about_us.html">About us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reverse_engineering.html">Reverse Engineering</a></li>
+                    <li class="nav-item"><a class="nav-link" href="how_to.html">Amazon Echo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
                 </ul>
                 </div>
+            </div>
             </div>
         </nav>
 
@@ -37,7 +46,7 @@
             <div class="vr opacity-0"></div>
         </div>
 
-        <div class="d-flex flex-row flex-wrap justify-content-around mb-3 mx-5">
+        <div class="d-flex flex-row flex-wrap justify-content-center mb-3 mx-5">
             <div class="card mb-3" style="width: 500px">
                 <img src="images/about_us/maria.jpg" class="card-img-top" alt="maria's image">
                 <div class="card-body">
