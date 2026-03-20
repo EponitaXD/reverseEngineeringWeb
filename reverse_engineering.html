@@ -80,6 +80,97 @@
                 tool for learning from existing solutions, maintaining and upgrading complex 
                 systems, and fostering innovation by building upon what already exists.
             </p>
+
+            <div class="d-flex" style="height: 5vh;">
+                <div class="vr opacity-0"></div>
+            </div>
+
+            <h1>Stages of Reverse Engineering:</h1>
+
+            <section id="reference">
+                <h2>1. Reference Material / Prior Work</h2>
+                <p>Why start from scratch when you can utilize what is known?</p>
+                <ul>
+                    <li>Search online for information about the device you want to reverse engineer.</li>
+                    <li>Compile useful resources for future reference.</li>
+                    <li>Store links and documentation in a dedicated reference section.</li>
+                </ul>
+            </section>
+
+            <div class="d-flex" style="height: 5vh;">
+                <div class="vr opacity-0"></div>
+            </div>
+
+            <section id="prep">
+                <h2>2. Preparation & Imaging</h2>
+                <p><strong>Important:</strong> Document how the device fits together so it can be rebuilt.</p>
+                <ul>
+                    <li><strong>High-Resolution Photos:</strong> Capture the exterior, ports, and internal PCB.</li>
+                    <li><strong>Inventory:</strong> List all visible chips and part numbers.</li>
+                    <li><strong>Safety Check:</strong> Identify the power source and ensure the device is powered off before working.</li>
+                </ul>
+            </section>
+
+            <div class="d-flex" style="height: 5vh;">
+                <div class="vr opacity-0"></div>
+            </div>
+
+            <section id="hardware">
+                <h2>3. Hardware Exploration (Teardown)</h2>
+                <ul>
+                    <li><strong>Identify Components:</strong> Look up datasheets for each chip to understand its function.</li>
+                    <li><strong>Find Test Points:</strong> Locate pads labeled GND, VCC, TX, or RX for debugging access.</li>
+                </ul>
+            </section>
+
+            <div class="d-flex" style="height: 5vh;">
+                <div class="vr opacity-0"></div>
+            </div>
+
+            <section id="data">
+                <h2>4. Data Extraction (Digital Forensics Lite)</h2>
+                <ul>
+                    <li><strong>Port Scanning:</strong> Connect via USB or Ethernet to see how the device is recognized.</li>
+                    <li><strong>UART / Serial Access:</strong> Use a USB-to-TTL adapter to monitor communication through TX/RX pins.</li>
+                </ul>
+            </section>
+
+            <div class="d-flex" style="height: 5vh;">
+                <div class="vr opacity-0"></div>
+            </div>
+
+            <section id="analysis">
+                <h2>5. Analysis & Software Reverse Engineering</h2>
+                <p><strong>Ghidra</strong> is a free, open-source software reverse engineering suite used for binary analysis and decompilation.</p>
+                <ul>
+                    <li><strong>Code Review:</strong> Analyze firmware by loading it into Ghidra.</li>
+                    <li><strong>Visual Mapping:</strong> Create block diagrams showing component connections.</li>
+                </ul>
+            </section>
+
+            <div class="d-flex" style="height: 5vh;">
+                <div class="vr opacity-0"></div>
+            </div>
+
+            <section id="testing">
+                <h2>6. Testing & Feedback Loop</h2>
+                <ul>
+                    <li><strong>Observation:</strong> Modify connections or settings and observe behavior changes.</li>
+                    <li><strong>Verification:</strong> Test hypotheses (e.g., power a component to confirm its function).</li>
+                </ul>
+            </section>
+
+            <div class="d-flex" style="height: 5vh;">
+                <div class="vr opacity-0"></div>
+            </div>
+
+            <section id="documentation">
+                <h2>7. Personal Documentation</h2>
+                <ul>
+                    <li><strong>Technical Notes:</strong> Record successes and failures.</li>
+                    <li><strong>Final Report:</strong> Summarize findings and share with others if desired.</li>
+                </ul>
+            </section>
         </div>
 
         <div class="d-flex" style="height: 25vh;">

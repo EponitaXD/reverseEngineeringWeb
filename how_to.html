@@ -63,6 +63,8 @@
                     <nav class="nav flex-column border rounded p-3 bg-light">
                         <a class="nav-link active" href="#materials">Materials</a>
                         <a class="nav-link" href="#disassembling">Step 1: Disassembling</a>
+                        <a class="nav-link" href="#extracting_binaries">Step 2: Extracting Binaries</a>
+                        <a class="nav-link" href="#exploring_file_system">Step 3: Exploring File System</a>
                         <a class="nav-link" href="#reference">Reference Materials</a>
                     </nav>
                 </div>
@@ -74,6 +76,8 @@
                     <nav class="nav flex-column">
                         <a class="nav-link active" href="#materials">Materials</a>
                         <a class="nav-link" href="#disassembling">Step 1: Disassembling</a>
+                        <a class="nav-link" href="#extracting_binaries">Step 2: Extracting Binaries</a>
+                        <a class="nav-link" href="#exploring_file_system">Step 3: Exploring File System</a>
                         <a class="nav-link" href="#reference">Reference Materials</a>
                     </nav>
                 </div>
@@ -162,13 +166,152 @@
                     <div class="vr opacity-0"></div>
                 </div>
 
+                <h2 id="extracting_binaries">Step 2: Extracting Binaries</h2>
+                <p>Assuming that you are using a Debian Based linux distribution all the commands should be the same. The following steps use an Ubuntu operating system:</p>
+
+                <p>1. First make a folder wherever you want to store the binaries extracted from the echo</p>
+                <pre><code>>> mkdir thePathToYourFolder\YourFolderName</code></pre>
+
+                <p>2. Navigate to your folder</p>
+                <pre><code>>> cd thePathToYourFolder\YourFolderName</code></pre>
+
+                <p>3. Plug in the chip reader with your chip in place</p>
+
+                <p>Check that the device is recognized by running</p>
+                <pre><code>>> sudo dmesg -w</code></pre>
+
+                <p>before plugging it in (remember to use Ctrl+C to stop the command)</p>
+
+                <p>You will get this information:</p>
+
+                <img src="images/how_to/step2/you_will_get_this_information.png" class="img-fluid" alt="terminal screenshot">
+
+                <p>Take note of where it says sda: sda1 sda2… and right bellow it says that the file system is mounted</p>
+
+                <p>You can also see this better by running the command lsblk to see the storage with mountpoints</p>
+
+                <p>We should mention that if you did everything right and there are no problems with the chip you should proceed to steps 4a. Otherwise you might have something similar to this:</p>
+
+                <img src="images/how_to/step2/Otherwise_you_might_have_something_similar_to_this.png" class="img-fluid" alt="terminal screenshot">
+
+                <p>The same as before with some error at the end.</p>
+
+                <p>This errors mean that the chip got damaged in some way (most likely due to the extraction)</p>
+
+                <p>The process is almost the same, just that we will have to use a much slower command and there might be corrupted binary in important places (or maybe not). In this case follow 4b</p>
+
+                <p>4a. Next we will want to copy the binary from the chip to store in our computer. That way it is a bit easier to analyse. Run the command</p>
+                <pre><code>>> dd -if=/dev/sda1 -of=sda1.bin</code></pre>
+
+                <p>Notice that we are using sda1 since in our case that was the name we saw in the previous step. Also note that we are in the folder we made.</p>
+
+                <p>4b. Because there is some corrupted segments in the chip, it will require a more involved process. First you need to download from the terminal ddrescue.</p>
+                <pre><code>>> sudo apt install ddrescue</code></pre>
+
+                <p>Now we will want to run</p>
+                <pre><code>>> ddrescue /dev/sda1 sda1.bin</code></pre>
+
+                <p>This last command will actually start the copying process and will try to extract as much data as is available. This copying will take a while, especially if that section has a lot of damage. After it has finished running you can see what percentage of the section had damage.</p>
+
+                <p>5.You will want to repeat the last command you did in the previous step but changing the 1 for every other number that you saw in step 4</p>
+
+
+                <div class="d-flex" style="height: 10vh;">
+                    <div class="vr opacity-0"></div>
+                </div>
+
+                <h2 id="exploring_file_system">Step 3: Exploring File System</h2>
+
+                <p>Congratulations you have now extracted the information out of the chip. At this point you can turn off and unplug the chip reader as we only need to look at files folders and assembly/decompiled code.</p>
+
+                <p>From here on the guide is a bit more free, don't think that you have to follow all the steps one after the other. Unless you delete something, feel free to play around with the files.</p>
+
+                <p>Also, from this point onwards you should have Ghidra installed to be able to look at the files more closely.</p>
+
+                <p>First I recommend using the file command to see if linux can identify it</p>
+                <pre><code>>> file sda1.bin</code></pre>
+
+                <p>If you apply it to all files, you should see that</p>
+
+                <p>sda10, sda11, sda12 contain the android kernel + ramdisk, and command line arguments for the kernel</p>
+
+                <p>On the other hand, sda13 through sda16 is just a file system.</p>
+
+                <p>Another interesting command that may give you some insight is</p>
+                <pre><code>>> strings sda1.bin</code></pre>
+
+                <p>Some of the strings contained in the file may give you an idea of what that file does.</p>
+
+                <p>Since sda13 through sda16 are filesystems we can try to mount them with the command</p>
+                <pre><code>>> mount sda13.bin &lt;folder name&gt;</code></pre>
+
+                <p>While this will work, I recommend just copying the contents of the filesystem. While you can use whichever method you like I recommend using debugfs. Here is how to do it from the folder that contains the bin files:</p>
+
+                <pre><code>>> debugfs
+>> rdump ./ &lt;folder to store the filesystem&gt;</code></pre>
+
+                <p>Now you can look at the filesystem without having to mount it every time.</p>
+
+                <p>How can I extract information about the device from the files?</p>
+
+                <p>Realistically there are too many files to look through and figure out how everything works, although one can certainly try, for this reason I recommend fishing for info through grep and find.</p>
+
+                <p>For example, in sda14, using</p>
+                <pre><code>>> grep -r -i amazon</code></pre>
+
+                <p>Pulls up every file that mentions Amazon in any capitalization:</p>
+
+                <img src="images/how_to/step3/This_looks_something_like_this.png" class="img-fluid" alt="terminal screenshot">
+
+                <p>I recommend piping it to less so that it is easier to scroll:</p>
+                <pre><code>>> grep -r -i amazon | less</code></pre>
+
+                <p>In it we can see some possible urls the device may be talking to. Although in order to know we would need to do analysis of the network usage of the device.</p>
+
+                <p>Another interesting thing to look at is searching for versions.</p>
+                <pre><code>>> grep -r -i version | less</code></pre>
+
+                <pre>
+            sda14/system/vendor/data/misc/ProjectConfig.mk:LINUX_KERNEL_VERSION = kernel-3.18
+            sda14/system/build.prop:ro.build.version.name=Fire OS 6.5.6.9 (NS6569/6009)
+            sda14/system/build.prop:ro.build.version.release=7.1.2
+                </pre>
+
+                <p>With this we note that this amazon echo appears to run a linux kernel version of 3.18. And Amazon's proprietary Android fork of Fire OS version 6.5.6.9</p>
+
+                <p>Seeing as to how build.prop appeared multiple times it may be a good idea to check it out</p>
+
+                <pre>
+            # ro.product.cpu.abi and ro.product.cpu.abi2 are obsolete,
+            # use ro.product.cpu.abilist instead.
+            ro.product.cpu.abi=armeabi-v7a
+            ro.product.cpu.abi2=armeabi
+            ro.product.cpu.abilist=armeabi-v7a,armeabi
+            ro.product.cpu.abilist32=armeabi-v7a,armeabi
+            ro.product.cpu.abilist64=
+                </pre>
+
+                <p>And with a quick google search this tells us that the assembly will be written in one of the following instruction sets: armeabi, Thumb-2, or Neon. But since we can see armeabi already there, there is a high likelihood it is the one we’re looking for.</p>
+
+                <div class="d-flex" style="height: 10vh;">
+                    <div class="vr opacity-0"></div>
+                </div>
+
                 <h3 id="reference">Reference Materials:</h3>
-                <div class="d-flex justify-content-center">
-                    <iframe src="https://www.youtube.com/embed/H0IEMVDebzE?si=5nGpVjoudggG0WxS" 
-                    title="YouTube video player" frameborder="0" class="w-50 h-100"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                <div class="d-flex">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/H0IEMVDebzE?si=Wl76F1JncKJFjuWJ&amp;start=1" 
+                    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
+                <div class="d-flex mt-5">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/QYsE1lifKaI?si=RztprXVFoE83bADY" 
+                    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <p class="mt-5">
+                    M. Hughes, “Teardown Tuesday: Amazon Echo Dot v2,” All About Circuits, Nov. 1, 
+                    2016. [Online]. Available: <a href="https://www.allaboutcircuits.com/news/teardown-tuesday-amazon-echo-dot-v2/">https://www.allaboutcircuits.com/news/teardown-tuesday-amazon-echo-dot-v2/</a>. [Accessed: Mar. 19, 2026].
+                </p>
             </div>
         </div>
         </div>
