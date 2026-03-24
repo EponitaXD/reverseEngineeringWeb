@@ -125,6 +125,21 @@
                 </div>
 
                 <h3 id="disassembling">Step 1: Disassembling the Amazon Echo</h3>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                    <img src="images/hazard_warning/generalWarning.png" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">WARNING</h5>
+                        <p class="card-text">Ensure the device is unplugged and powered off before disassembly to avoid electric shock or component damage.</p>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
                 <p>Use the jimmy (11) and metal spudger (10) to take off the rubber and plastic from the echo.</p>
 
                 <div class="d-flex justify-content-center">
@@ -147,6 +162,20 @@
                     </video>
                 </div>
                 
+                <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                    <img src="images/hazard_warning/generalWarning.png" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">WARNING</h5>
+                        <p class="card-text">Disconnect power before handling. Use ESD precautions to avoid damaging sensitive electronics.</p>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
                 <p>Remove the orange ribbon cable from PCB using the jimmy (11).</p>
 
                 <div class="d-flex justify-content-center">
@@ -154,6 +183,20 @@
                     <img src="images/how_to/step1/remove_the_orange_ribbon_cable0.jpg" alt="back of the echo" class="w-25 mx-3 mb-5">
                 </div>
                 
+                <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                    <img src="images/hazard_warning/generalWarning.png" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">WARNING</h5>
+                        <p class="card-text">Heat gun operates at extremely high temperatures (~410°C). Risk of severe burns and fire. Use heat-resistant gloves and work in a ventilated area away from flammable materials. Flux fumes can be harmful—use ventilation or fume extraction.</p>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
                 <p>
                     Now that the main PCB is detached, find the side with the metal cap and pry off using the metal 
                     spudger (10). Identify the chips using previous RE work. Use heat gun at 410 °C. Heat up the 
@@ -177,7 +220,35 @@
                 <p>2. Navigate to your folder</p>
                 <pre><code>>> cd thePathToYourFolder\YourFolderName</code></pre>
 
+                <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                    <img src="images/hazard_warning/generalWarning.png" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">WARNING</h5>
+                        <p class="card-text">Ensure correct orientation before powering. Improper insertion may damage the chip or reader.</p>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
                 <p>3. Plug in the chip reader with your chip in place</p>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                    <img src="images/hazard_warning/generalWarning.png" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">WARNING</h5>
+                        <p class="card-text">Commands using sudo grant administrative privileges—use carefully to avoid unintended system changes.</p>
+                    </div>
+                    </div>
+                </div>
+                </div>
 
                 <p>Check that the device is recognized by running</p>
                 <pre><code>>> sudo dmesg -w</code></pre>
@@ -201,6 +272,20 @@
                 <p>This errors mean that the chip got damaged in some way (most likely due to the extraction)</p>
 
                 <p>The process is almost the same, just that we will have to use a much slower command and there might be corrupted binary in important places (or maybe not). In this case follow 4b</p>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                    <img src="images/hazard_warning/generalWarning.png" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">WARNING</h5>
+                        <p class="card-text">dd can overwrite disks if used incorrectly. Double-check device paths before executing.</p>
+                    </div>
+                    </div>
+                </div>
+                </div>
 
                 <p>4a. Next we will want to copy the binary from the chip to store in our computer. That way it is a bit easier to analyse. Run the command</p>
                 <pre><code>>> dd -if=/dev/sda1 -of=sda1.bin</code></pre>
@@ -243,6 +328,20 @@
                 <pre><code>>> strings sda1.bin</code></pre>
 
                 <p>Some of the strings contained in the file may give you an idea of what that file does.</p>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                    <img src="images/hazard_warning/generalWarning.png" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">WARNING</h5>
+                        <p class="card-text">Ensure correct file/device selection when mounting to prevent data corruption.</p>
+                    </div>
+                    </div>
+                </div>
+                </div>
 
                 <p>Since sda13 through sda16 are filesystems we can try to mount them with the command</p>
                 <pre><code>>> mount sda13.bin &lt;folder name&gt;</code></pre>
