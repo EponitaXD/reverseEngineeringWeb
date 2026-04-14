@@ -65,6 +65,8 @@
                         <a class="nav-link" href="#disassembling">Step 1: Disassembling</a>
                         <a class="nav-link" href="#extracting_binaries">Step 2: Extracting Binaries</a>
                         <a class="nav-link" href="#exploring_file_system">Step 3: Exploring File System</a>
+                        <a class="nav-link" href="#step4Wireshark">Step 4: Checking Traffic using Wireshark</a>
+                        <a class="nav-link" href="#step5Guidra">Step 5: Using Guidra</a>
                         <a class="nav-link" href="#reference">Reference Materials</a>
                     </nav>
                 </div>
@@ -78,6 +80,8 @@
                         <a class="nav-link" href="#disassembling">Step 1: Disassembling</a>
                         <a class="nav-link" href="#extracting_binaries">Step 2: Extracting Binaries</a>
                         <a class="nav-link" href="#exploring_file_system">Step 3: Exploring File System</a>
+                        <a class="nav-link" href="#step4Wireshark">Step 4: Checking Traffic using Wireshark</a>
+                        <a class="nav-link" href="#step5Guidra">Step 5: Using Guidra</a>
                         <a class="nav-link" href="#reference">Reference Materials</a>
                     </nav>
                 </div>
@@ -156,10 +160,7 @@
                 <p>Take back cap off of the device.</p>
 
                 <div class="d-flex justify-content-center">
-                    <video class="w-25 mb-5" controls>
-                        <source src="images/how_to/step1/take_back_cap_off.mp4" type="video/mp4">
-                        Your browser does not support HTML video.
-                    </video>
+                    <iframe width="560" height="315" src="https://youtube.com/embed/zl3DnWr3yxc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
                 
                 <div class="card mb-3" style="max-width: 540px;">
@@ -181,6 +182,10 @@
                 <div class="d-flex justify-content-center">
                     <img src="images/how_to/step1/remove_the_orange_ribbon_cable.jpg" alt="echo with an orange cable" class="w-25 mx-3 mb-5">
                     <img src="images/how_to/step1/remove_the_orange_ribbon_cable0.jpg" alt="back of the echo" class="w-25 mx-3 mb-5">
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/niXOGJoEZEw?si=7X69ATvZew3mJkLs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
                 
                 <div class="card mb-3" style="max-width: 540px;">
@@ -393,6 +398,234 @@
                 </pre>
 
                 <p>And with a quick google search this tells us that the assembly will be written in one of the following instruction sets: armeabi, Thumb-2, or Neon. But since we can see armeabi already there, there is a high likelihood it is the one we’re looking for.</p>
+
+                <div class="d-flex" style="height: 10vh;">
+                    <div class="vr opacity-0"></div>
+                </div>
+
+                <h3 id="step4Wireshark">Step 4: Checking Traffic using Wireshark</h3>
+
+                <p>
+                This process will be useful to better understand man in the middle attacks. For information 
+                about installing Wireshark go to 
+                <a href="https://www.wireshark.org/">https://www.wireshark.org/</a>.
+                </p>
+
+                <p>
+                First, connect your laptop to the router and turn on the laptop's wifi hotspot. Next open 
+                Wireshark and start looking at the traffic with Wireshark. Observer if there is any traffic. 
+                The first traffic is usually the laptop’s IP address, which can be omitted. Next, connect your 
+                phone to the hotspot, and look at the traffic. This will show your phone’s IP address. You may 
+                also see the urls to some of Amazon’s servers. Then, complete the alexa installation set up so 
+                that it connects to the hotspot (laptop). The newly added IP address will be the Amazon Echo. 
+                Finally, filter by DNS to see the urls to IP addresses. Then, look at the traffic of the device so 
+                that you can tell which url it is using for what communications (mostly the voice commands).
+                </p>
+
+                <img src="images/how_to/step4/Wireshark1.png" class="img-fluid" alt="Network Traffic">
+                <img src="images/how_to/step4/Wireshark2.png" class="img-fluid" alt="Network Traffic">
+
+                <div class="d-flex" style="height: 10vh;">
+                    <div class="vr opacity-0"></div>
+                </div>
+
+                <h3 id="step5Guidra">Step 5: Using Guidra</h3>
+
+                <p>
+                After checking that the traffic is encrypted, we need to find the SSL key. To do that we searched 
+                in the file system for “grep -i -r sslkeylogger” and we got three potential files:
+                </p>
+
+                <ul>
+                    <li>AlexaHybridExecutionControllerLitespeed</li>
+                    <li>Libcurl_nghttp2.so</li>
+                    <li>libSmartHomeSkill_ace.so</li>
+                </ul>
+
+                <p>
+                This guide assumes the user has Ghidra installed. For more information visit 
+                <a href="https://ghidralite.com/">https://ghidralite.com/</a>.
+                </p>
+
+                <p>
+                Open Guidra and click File &gt; Import File. Choose the binary files to upload them. Double click 
+                on the binary file to open. The software will ask you if you want to analyze the binary. Click yes, 
+                and wait for the file to be analyzed. Once done, click Search &gt; Memory… Here you may search 
+                for strings inside the binary file. Look for “ssl”, “sslkey”, and similar words. 
+                </p> 
+
+                <img src="images/how_to/step5/ghidra0.png" class="img-fluid" alt="Ghidra">
+                <img src="images/how_to/step5/ghidra1.png" class="img-fluid" alt="Ghidra">
+
+                <p>For the AlexaHybridExecutionControllerLitespeed, Ghidra was able to find a SSLKEYLOGFILE string 
+                that belongs to the following function.
+                </p>
+
+                <pre>
+    undefined4 FUN_0078a0b8(void)
+    {
+    char cVar1;
+    int iVar2;
+    int iVar3;
+    byte *__s;
+    char *__filename;
+    int iVar4;
+    uint extraout_r1;
+    uint uVar5;
+
+    if (DAT_009a42f0 == '\x01') {
+        if (DAT_009a42f4 == '\0') {
+        DAT_009a42f4 = '\x01';
+        iVar2 = FUN_008078a0();
+        if (iVar2 != 0) {
+            iVar3 = (*(int *)(iVar2 + 0x180) + 1) % 0x10;
+            *(int *)(iVar2 + 0x180) = iVar3;
+            if (iVar3 == *(int *)(iVar2 + 0x184)) {
+            cVar1 = (char)iVar3 + '\x01';
+            *(int *)(iVar2 + 0x184) =
+                (int)(char)(cVar1 - (cVar1 + (byte)((uint)((int)cVar1 << 0x11) >> 0x1c) & 0xf0));
+            }
+            *(undefined4 *)(iVar2 + iVar3 * 4) = 0;
+            iVar4 = iVar2 + *(int *)(iVar2 + 0x180) * 4;
+            *(undefined4 *)(iVar4 + 0x140) = 0;
+            iVar3 = *(int *)(iVar2 + 0x180);
+            *(undefined4 *)(iVar4 + 0x40) = 0x14156046;
+            *(undefined1 **)(iVar4 + 0x100) = &DAT_00326328;
+            if ((*(byte *)(iVar2 + iVar3 * 4 + 0xc0) & 1) != 0) {
+            free(*(void **)(iVar2 + 0x80 + iVar3 * 4));
+            iVar3 = *(int *)(iVar2 + 0x180);
+            *(undefined4 *)(iVar2 + 0x80 + iVar3 * 4) = 0;
+            }
+            *(undefined4 *)(iVar2 + iVar3 * 4 + 0xc0) = 0;
+        }
+        }
+    }
+    else {
+        iVar2 = FUN_008144bc(0x764c,0);
+        if (iVar2 != 0) {
+        pthread_once((pthread_once_t *)&DAT_009a61cc,FUN_007a577c);
+        }
+    }
+    if (DAT_009a0988 == (FILE *)0x0) {
+        __s = (byte *)getenv("SSLKEYLOGFILE");
+        uVar5 = extraout_r1;
+        if (__s != (byte *)0x0) {
+        uVar5 = (uint)*__s;
+        }
+        if ((__s != (byte *)0x0 && uVar5 != 0) &&
+        (__filename = strdup((char *)__s), __filename != (char *)0x0)) {
+
+        DAT_009a0988 = fopen(__filename,"a");
+        if ((DAT_009a0988 != (FILE *)0x0) &&
+            (iVar2 = setvbuf(DAT_009a0988,(char *)0x0,1,0x1000), iVar2 != 0)) {
+            fclose(DAT_009a0988);
+            DAT_009a0988 = (FILE *)0x0;
+        }
+        free(__filename);
+        return 1;
+        }
+    }
+    return 1;
+    }
+                </pre>
+
+                <p>
+                The Libcurl_nghttp2.so produced eight instances of source code with relation to the string 
+                “sslkey”. Here’s one function:
+                </p>
+
+                <pre>
+    void Curl_tls_keylog_open(void)
+    {
+    char *__filename;
+    int iVar1;
+    
+    if ((DAT_0006ca8c == (FILE *)0x0) &&
+        (__filename = (char *)curl_getenv("SSLKEYLOGFILE"), __filename != (char *)0x0)) {
+        DAT_0006ca8c = fopen(__filename,"a");
+        if ((DAT_0006ca8c != (FILE *)0x0) &&
+        (iVar1 = setvbuf(DAT_0006ca8c,(char *)0x0,1,0x1000), iVar1 != 0)) {
+        fclose(DAT_0006ca8c);
+        DAT_0006ca8c = (FILE *)0x0;
+        }
+        (*Curl_cfree)(__filename);
+        return;
+    }
+    return;
+    }
+                </pre>
+
+                <p>
+                The following source code was generated from libSmartHomeSkill_ace.so in relation to the 
+                “sslkey” search:
+                </p>
+
+                <pre>
+    undefined4 FUN_002c9840(void)
+    {
+    char cVar1;
+    int iVar2;
+    int iVar3;
+    byte *__s;
+    char *__filename;
+    int iVar4;
+    uint extraout_r1;
+    uint uVar5;
+    
+    if (DAT_003a7ff8 == '\x01') {
+        if (DAT_003a7ffc == '\0') {
+        DAT_003a7ffc = '\x01';
+        iVar2 = FUN_0033db70();
+        if (iVar2 != 0) {
+            iVar3 = (*(int *)(iVar2 + 0x180) + 1) % 0x10;
+            *(int *)(iVar2 + 0x180) = iVar3;
+            if (iVar3 == *(int *)(iVar2 + 0x184)) {
+            cVar1 = (char)iVar3 + '\x01';
+            *(int *)(iVar2 + 0x184) =
+                (int)(char)(cVar1 - (cVar1 + (byte)((uint)((int)cVar1 << 0x11) >> 0x1c) & 0xf0));
+            }
+            *(undefined4 *)(iVar2 + iVar3 * 4) = 0;
+            iVar4 = iVar2 + *(int *)(iVar2 + 0x180) * 4;
+            *(undefined4 *)(iVar4 + 0x140) = 0;
+            iVar3 = *(int *)(iVar2 + 0x180);
+            *(undefined4 *)(iVar4 + 0x40) = 0x14156046;
+            *(undefined1 **)(iVar4 + 0x100) = &DAT_0010a1b8;
+            if ((*(byte *)(iVar2 + iVar3 * 4 + 0xc0) & 1) != 0) {
+            free(*(void **)(iVar2 + 0x80 + iVar3 * 4));
+            iVar3 = *(int *)(iVar2 + 0x180);
+            *(undefined4 *)(iVar2 + 0x80 + iVar3 * 4) = 0;
+            }
+            *(undefined4 *)(iVar2 + iVar3 * 4 + 0xc0) = 0;
+        }
+        }
+    }
+    else {
+        iVar2 = FUN_0034a63c(0x764c,0);
+        if (iVar2 != 0) {
+        pthread_once((pthread_once_t *)&DAT_003a8114,FUN_002da6d8);
+        }
+    }
+    if (DAT_003a58c0 == (FILE *)0x0) {
+        __s = (byte *)getenv("SSLKEYLOGFILE");
+        uVar5 = extraout_r1;
+        if (__s != (byte *)0x0) {
+        uVar5 = (uint)*__s;
+        }
+        if ((__s != (byte *)0x0 && uVar5 != 0) &&
+        (__filename = strdup((char *)__s), __filename != (char *)0x0)) {
+        DAT_003a58c0 = fopen(__filename,"a");
+        if ((DAT_003a58c0 != (FILE *)0x0) &&
+            (iVar2 = setvbuf(DAT_003a58c0,(char *)0x0,1,0x1000), iVar2 != 0)) {
+            fclose(DAT_003a58c0);
+            DAT_003a58c0 = (FILE *)0x0;
+        }
+        free(__filename);
+        return 1;
+        }
+    }
+    return 1;
+    }
+                </pre>
 
                 <div class="d-flex" style="height: 10vh;">
                     <div class="vr opacity-0"></div>
